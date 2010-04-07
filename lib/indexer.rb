@@ -177,6 +177,7 @@ module Indexer
       # if the finder class is "self" or empty (can be a simple "find()" in a model)
       if model_name == "self" || model_name.blank?
         model_name = File.basename(file_name).sub(/\.rb$/,'').camelize
+        return if model_name.match(/Controller/)
         table_name = model_name.constantize.table_name            
       else
         if model_name.respond_to?(:constantize)
